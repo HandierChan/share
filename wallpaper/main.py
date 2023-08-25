@@ -5,8 +5,8 @@ import os
 
 
 def create_AppData_path(folder_name):
-    appdataPath=os.getenv('appdata')
-    pathName=os.path.normpath(f'{appdataPath}/{folder_name}')
+    tempPath=os.getenv('temp')
+    pathName=os.path.normpath(f'{tempPath}/{folder_name}')
     if not os.path.exists(pathName):
         try:os.makedirs(pathName)
         except:pass
