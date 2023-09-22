@@ -4,6 +4,11 @@ import requests
 import os
 
 
+def get_current_time():
+    epoch_time = time.time()
+    current_time = time.strftime("%Y%m%d%H%M", time.localtime(epoch_time))
+    return current_time
+
 def create_AppData_path(folder_name):
     tempPath=os.getenv('temp')
     pathName=os.path.normpath(f'{tempPath}/{folder_name}')
@@ -16,7 +21,7 @@ def download_jpg(file_name):
     try:
         # response = requests.get('http://img.nsmc.org.cn/CLOUDIMAGE/FY4B/AGRI/GCLR/FY4B_DISK_GCLR.JPG')
         response = requests.get('http://img.nsmc.org.cn/CLOUDIMAGE/FY4B/AGRI/GCLR/FY4B_REGC_GCLR.JPG',timeout=120)
-        with open(file_name,"wb") as file:
+        with open(file_name,'wb') as file:
             file.write(response.content)
     except:pass
 
@@ -25,8 +30,9 @@ def set_wallpaper(file_name):
 
 
 
-image_path=create_AppData_path('Wallpaper')
+download_path=create_AppData_path('Wallpaper')
 while True:
-    download_jpg(image_path+'/FY4B.jpg')
-    set_wallpaper(image_path+'/FY4B.jpg')
+    image_file=download_path+'/FY4B_'+get_current_time()+'.jpg'
+    download_jpg(image_file)
+    set_wallpaper(image_file)
     time.sleep(3600)
