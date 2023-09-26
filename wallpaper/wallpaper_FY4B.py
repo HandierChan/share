@@ -29,9 +29,8 @@ def set_wallpaper(file_name):
     ctypes.windll.user32.SystemParametersInfoW(0x0014,0,file_name,3)
 
 
-
-download_path=create_AppData_path('Wallpaper')
 while True:
+    download_path=create_AppData_path('Wallpaper')
     image_file=download_path+'/FY4B_'+get_current_time()+'.jpg'
     download_jpg(image_file)
     set_wallpaper(image_file)
