@@ -2,19 +2,19 @@
 # 定义图片保存文件夹和文件名
 $folderName = "download"
 $fileName = "FY4B"
-
 $currentTime = Get-Date -Format "yyyyMMddHHmm"
 
 $scriptPath = $MyInvocation.MyCommand.Path
 $scriptDirectory = Split-Path -Path $scriptPath -Parent
 
 $folderPath = Join-Path -Path $scriptDirectory -ChildPath $folderName
-New-Item -ItemType Directory -Path $folderPath
+if (-not (Test-Path $folderPath)) {
+    New-Item -ItemType Directory -Path $folderPath
+}
 
 $fullPath = Join-Path -Path $folderPath -ChildPath "$fileName.jpg"
 
-
-# $fullPath | Out-File -FilePath "z:\output.txt" -Encoding UTF8
+# Add-Content -Path "z:\aa.txt" -Value $fullPath -Encoding UTF8
 
 # 下载图片
 $url = "https://img.nsmc.org.cn/CLOUDIMAGE/FY4B/AGRI/GCLR/FY4B_REGC_GCLR.JPG"
